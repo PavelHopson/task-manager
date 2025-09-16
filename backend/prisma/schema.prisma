@@ -1,0 +1,20 @@
+// backend/prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Task {
+  id            Int      @id @default(autoincrement())
+  username      String
+  email         String
+  text          String
+  isCompleted   Boolean  @default(false)
+  isAdminEdited Boolean  @default(false) // <-- Добавлено новое поле
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

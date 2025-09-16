@@ -1,0 +1,271 @@
+/* Базовые стили для всего приложения */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Заголовки */
+h1, h2 {
+  color: #333;
+  margin-top: 0;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+}
+
+h2 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* Общие стили для форм */
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Включено для корректной ширины с padding */
+  font-size: 16px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Стили для кнопок */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Стили для кнопок с другим цветом (например, Logout, Cancel) */
+button.logout-btn,
+button.cancel-btn {
+  background-color: #f44336;
+}
+
+button.logout-btn:hover,
+button.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Стили для ошибок валидации */
+p[style*="color: red"] { /* Стиль из компонента */
+  color: #f44336 !important;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+/* Стили для списка задач */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-left: 4px solid #4CAF50; /* Акцентная линия */
+}
+
+li strong {
+  color: #333;
+}
+
+/* Стили для статуса задачи */
+.completed-task {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.admin-edited-task {
+  color: #2196F3; 
+  font-style: italic;
+  font-size: 0.9em;
+  margin-left: 5px; /* Небольшой отступ от предыдущего текста/статуса */
+}
+
+/* Стили для элементов пагинации и сортировки */
+.pagination-controls,
+.sort-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap; /* Перенос на новую строку при необходимости */
+}
+
+.sort-controls {
+  justify-content: flex-start; /* Выравнивание влево */
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.sort-controls label {
+  margin-bottom: 0; /* Убираем нижний отступ у лейблов в сортировке */
+  margin-right: 5px;
+}
+
+.sort-controls select {
+  width: auto; /* Ширина по содержимому */
+  min-width: 120px;
+}
+
+/* Стили для модального окна редактирования */
+/* (Базовые стили уже есть в компоненте EditTaskModal.jsx, но можно немного уточнить) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-close-button:hover {
+  color: #333;
+}
+
+/* Стили для сообщений об успехе/ошибке админа */
+.admin-message {
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.admin-message.success {
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  color: #3c763d;
+}
+
+.admin-message.error {
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  color: #a94442;
+}
+
+/* Стили для кнопки редактирования задачи */
+.edit-task-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* Горизонтальная линия */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
+
+/* Адаптивность (простая) */
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+
+  .sort-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sort-controls > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sort-controls label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .sort-controls select {
+    width: 100%;
+  }
+}

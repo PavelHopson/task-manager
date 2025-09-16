@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    container_name: task_manager_db
+    restart: always # Перезапускать контейнер при остановке
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: task_manager
+    ports:
+      - "5432:5432" # Открываем порт 5432 хоста для подключения
+    volumes:
+      - db_data:/var/lib/postgresql/data # Сохраняем данные БД в именованном томе
+
+volumes:
+  db_data: # Определяем именованный том для данных
