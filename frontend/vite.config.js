@@ -6,21 +6,19 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // Эти настройки для `vite dev` (локальная разработка)
-    host: true, // Слушаем на 0.0.0.0
-    port: 5173, // Стандартный порт для `vite dev`
+    host: true, // Для dev сервера, но не помешает
+    port: 5173,
   },
+  // --- КРИТИЧЕСКИ ВАЖНАЯ ЧАСТЬ ДЛЯ PREVIEW ---
   preview: {
-    // Эти настройки специфичны для `vite preview` (используется Railway)
-    host: true, // Слушаем на 0.0.0.0
-    port: 4173, // Стандартный порт для `vite preview`, Railway переопределит $PORT
+    host: true, // Слушать 0.0.0.0
+    port: 4173,  // Стандартный порт preview, Railway переопределит $PORT
     strictPort: false,
-    // --- Добавлено для решения проблемы 403 ---
+    // Явно разрешаем хост Railway
     allowedHosts: [
-      'task-manager-copy-production.up.railway.app',
-      // Если у вас несколько подобных сервисов или динамические имена, можно добавить:
-      // '.railway.app' // Разрешает все поддомены .railway.app (менее строго)
+      'task-manager-copy-production.up.railway.app'
+      // Альтернатива (если имена могут меняться): '.railway.app'
     ]
-    // --- Конец добавления ---
   }
+  // --- КОНЕЦ КРИТИЧЕСКОЙ ЧАСТИ ---
 })
