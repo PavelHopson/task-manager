@@ -6,7 +6,7 @@
 
 ## Демонстрация
 
-Рабочее приложение доступно по адресу: [https://task-manager-frontend-pi.vercel.app/](https://task-manager-frontend-pi.vercel.app/)
+Рабочее приложение доступно по адресу: [https://task-manager-copy-production.up.railway.app/](https://task-manager-copy-production.up.railway.app/)
 
 ## Технологии
 
