@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Базовый URL бэкенда
-const API_BASE_URL = 'https://task-manager-production-3af3.up.railway.app/api'; //const API_BASE_URL = 'http://localhost:4000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api'; //const API_BASE_URL = 'http://localhost:4000/api';
 
 // Async Thunk для получения задач с пагинацией и сортировкой
 export const fetchTasks = createAsyncThunk(
