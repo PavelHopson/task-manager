@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:4000/api';
+const API_BASE_URL = 'https://task-manager-production-46f3.up.railway.app/api'; //const API_BASE_URL = 'http://localhost:4000/api';
 
 const initialState = {
   token: localStorage.getItem('token'), // Загружаем токен из localStorage при инициализации
