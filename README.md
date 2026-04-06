@@ -1,116 +1,145 @@
-# Task Manager (ToDo List)
+# Task Manager
 
-Это реализация тестового задания "ToDo List" в соответствии с требованиями [BeeJee](https://beejee.ru/coding-challenge-requirements-nodejs).
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Express](https://img.shields.io/badge/Express-5-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/compose/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-Приложение позволяет пользователям создавать задачи, просматривать их список с пагинацией и сортировкой. Администратор может войти в систему и редактировать задачи (изменять текст, отмечать как выполненные). Приложение отслеживает, если задача была отредактирована администратором.
+Полностековый менеджер задач с JWT-авторизацией, пагинацией, сортировкой и ролями (пользователь/администратор). Бэкенд на Express 5 + Prisma, фронтенд на React 18 + Redux Toolkit, база данных PostgreSQL в Docker.
 
-## Демонстрация
+---
 
-Рабочее приложение доступно по адресу: [https://task-manager-copy-production.up.railway.app/](https://task-manager-copy-production.up.railway.app/)
+## Демо
 
-## Технологии
+**[Открыть приложение](https://task-manager-copy-production.up.railway.app/)**
+
+---
+
+## Возможности
+
+- Создание задач с валидацией (имя, email, текст)
+- Пагинация (3 задачи на страницу) и сортировка по любому полю
+- JWT-авторизация администратора
+- Редактирование задач администратором (текст, статус)
+- Отметка "отредактировано администратором" при изменении текста
+- Защита от XSS-атак
+- Синхронизация logout между вкладками браузера
+- Docker Compose для локальной базы данных
+
+---
+
+## Технологический стек
 
 ### Бэкенд
-- **Node.js** (LTS)
-- **Express.js**
-- **Prisma ORM**
-- **PostgreSQL** (хостинг: Railway)
+
+| Технология | Назначение |
+|---|---|
+| **Express 5** | HTTP-сервер и API |
+| **Prisma ORM** | Работа с базой данных |
+| **PostgreSQL 15** | Реляционная БД |
+| **JWT (jsonwebtoken)** | Авторизация |
+| **express-validator** | Валидация запросов |
+| **Docker Compose** | Контейнеризация БД |
 
 ### Фронтенд
-- **React** (Vite)
-- **Redux Toolkit** (для управления состоянием)
-- **Axios** (для HTTP-запросов)
-- **react-hook-form** (для работы с формами)
-- **Yup** (для валидации форм)
 
-## Локальный запуск
+| Технология | Назначение |
+|---|---|
+| **React 18** | UI-компоненты |
+| **Redux Toolkit** | Управление состоянием |
+| **React Router 6** | Маршрутизация |
+| **React Hook Form + Yup** | Формы и валидация |
+| **Axios** | HTTP-клиент |
+| **Vite** | Сборка и dev-сервер |
+
+---
+
+## Быстрый старт
 
 ### Предварительные требования
 
-- Node.js (LTS, например, 18 или 20)
-- Git
-- Доступ к базе данных PostgreSQL (локально или удаленно, например, на Railway)
+- Node.js 18+
+- Docker и Docker Compose (для PostgreSQL)
 
-### Установка
+### 1. Клонирование и настройка
 
-1.  Клонируйте репозиторий:
-    ```bash
-    git clone https://github.com/PavelHopson/task-manager.git
-    cd task-manager
-    ```
-2.  Создайте файлы `.env`:
-    -   В папке `backend`, создайте файл `.env` со следующим содержимым (замените значения на ваши):
-        ```env
-        DATABASE_URL="postgresql://<пользователь>:<пароль>@<хост>:<порт>/<имя_базы>"
-        JWT_SECRET="ваш_очень_секретный_ключ_для_JWT"
-        ADMIN_USER="admin"
-        ADMIN_PASS="123"
-        PORT=4000
-        ```
-        *Примечание: `DATABASE_URL` должен указывать на вашу базу данных PostgreSQL.*
-    -   В папке `frontend` обычно не требуется файл `.env` для этого проекта, так как `VITE_API_BASE_URL` задается при деплое. Для локальной разработки фронтенд по умолчанию будет обращаться к `http://localhost:4000/api`.
+```bash
+git clone https://github.com/PavelHopson/task-manager.git
+cd task-manager
+```
 
-3.  Установите зависимости для бэкенда:
-    ```bash
-    cd backend
-    npm install
-    ```
-4.  Установите зависимости для фронтенда:
-    ```bash
-    cd ../frontend
-    npm install
-    cd ..
-    ```
+Скопируйте `.env.example` и настройте переменные:
 
-### Запуск
+```bash
+cp .env.example backend/.env
+```
 
-1.  Запустите сервер базы данных (если локальный).
-2.  Запустите бэкенд (в папке `backend`):
-    ```bash
-    cd backend
-    npm run dev
-    ```
-    Сервер запустится по адресу `http://localhost:4000`.
-3.  Запустите фронтенд (в папке `frontend`):
-    ```bash
-    cd ../frontend
-    npm run dev
-    ```
-    Фронтенд запустится по адресу `http://localhost:5173`.
+### 2. Запуск базы данных
 
-### Миграция базы данных (если нужно)
+```bash
+docker compose up -d
+```
 
-Если вы настраиваете базу данных с нуля, вам нужно применить миграции Prisma:
+### 3. Запуск бэкенда
 
-1.  Убедитесь, что `DATABASE_URL` в `backend/.env` корректна.
-2.  В папке `backend` выполните:
-    ```bash
-    npx prisma migrate deploy
-    ```
-    (Или `npx prisma migrate dev --name init` для первой миграции)
+```bash
+cd backend
+npm install
+npx prisma migrate deploy
+npm run dev
+```
 
-## Сценарий тестирования
+Сервер запустится на http://localhost:4000
 
-Приложение было протестировано по сценарию, предоставленному BeeJee:
+### 4. Запуск фронтенда
 
-1.  ✅ Просмотр списка задач с полями: имя пользователя, email, текст задачи, статус.
-2.  ✅ Создание задачи с валидацией (обязательные поля, валидный email).
-3.  ✅ Проверка на XSS (создание задачи с `<script>alert('test')</script>` не вызывает alert).
-4.  ✅ Пагинация по 3 задачи на странице.
-5.  ✅ Сортировка по имени пользователя, email и статусу (asc/desc).
-6.  ✅ Вход администратора (`admin`/`123`).
-7.  ✅ Редактирование задачи администратором (текст, статус).
-8.  ✅ Отображение статуса "Completed" для завершенных задач.
-9.  ✅ Отображение отметки "отредактировано администратором" при изменении текста админом.
-10. ✅ Синхронизация состояния аутентификации между вкладками браузера (logout в одной вкладке скрывает кнопки редактирования в другой без перезагрузки).
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Фронтенд запустится на http://localhost:5173
+
+---
+
+## Структура проекта
+
+```
+task-manager/
+├── backend/
+│   ├── src/
+│   │   └── index.js          # Express-сервер, маршруты, middleware
+│   ├── prisma/
+│   │   └── schema.prisma     # Модель данных
+│   └── package.json
+├── frontend/
+│   ├── src/                  # React-компоненты, Redux, роутинг
+│   ├── vite.config.js
+│   └── package.json
+├── docker-compose.yml        # PostgreSQL в контейнере
+├── .env.example              # Пример переменных окружения
+└── LICENSE
+```
+
+---
 
 ## Деплой
 
-Этот проект был задеплоен с использованием следующих сервисов:
--   **Бэкенд:** Railway (Node.js)
--   **Фронтенд:** Vercel (React/Vite)
--   **База данных:** Railway (PostgreSQL)
+| Сервис | Платформа |
+|---|---|
+| Бэкенд | Railway (Node.js) |
+| Фронтенд | Vercel (React/Vite) |
+| База данных | Railway (PostgreSQL) |
 
-## Затраченное время
+---
 
-Примерное общее время, затраченное на выполнение тестового задания: **4 часа 22 минуты**.
+## Лицензия
+
+Проект распространяется под лицензией MIT. Подробнее см. [LICENSE](LICENSE).
+
+## Автор
+
+**Павел Хопсон** — [GitHub](https://github.com/PavelHopson)
