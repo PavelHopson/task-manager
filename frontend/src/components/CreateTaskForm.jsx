@@ -39,9 +39,9 @@ const CreateTaskForm = () => {
   const isCreating = taskCreationStatus === 'loading';
 
   return (
-    <div> {/* Можно добавить класс обертки, если нужно, но форма уже стилизована */}
+    <div className="eclipse-card">
       <h2>Create New Task</h2>
-      <form onSubmit={handleSubmit(onSubmit)}> {/* Стили для form в App.css применятся */}
+      <form onSubmit={handleSubmit(onSubmit)} className="eclipse-form">
         <div>
           <label htmlFor="username">Username:</label>
           <input

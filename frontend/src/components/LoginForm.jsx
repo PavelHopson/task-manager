@@ -36,7 +36,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <div className="login-form-container">
       <h2>Admin Login</h2>
       {error && <p className="admin-message error">{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -47,6 +47,7 @@ const LoginForm = () => {
             type="text"
             id="login-username"
             name="username"
+            className="eclipse-input"
             value={credentials.username}
             onChange={handleChange}
             required
@@ -59,6 +60,7 @@ const LoginForm = () => {
             type="password"
             id="login-password"
             name="password"
+            className="eclipse-input"
             value={credentials.password}
             onChange={handleChange}
             required
@@ -66,9 +68,10 @@ const LoginForm = () => {
         </div>
         <button
           type="submit"
+          className="eclipse-accent-btn"
           disabled={status === 'loading'}
         >
-          {status === 'loading' ? 'Logging in...' : 'Login'}
+          {status === 'loading' ? 'Logging in...' : 'Войти'}
         </button>
       </form>
     </div>

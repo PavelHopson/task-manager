@@ -93,7 +93,7 @@ function App() {
               return null;
             }
             return (
-              <li key={task.id}>
+              <li key={task.id} className="task-item">
                 <div><strong>{task.username}</strong> ({task.email})</div>
                 <div style={{ marginTop: '5px' }}>
                   {task.text}
@@ -129,8 +129,8 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Task Manager</h1>
+    <div className="App eclipse-app">
+      <h1 style={{ fontFamily: "'Outfit', 'Inter', system-ui, sans-serif" }}>Задачи</h1>
       <LoginForm />
       <CreateTaskForm />
       <hr />

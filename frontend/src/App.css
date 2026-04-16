@@ -322,6 +322,98 @@ a:hover {
   color: #8AB8FF;
 }
 
+/* ===== Eclipse Enhanced Styles ===== */
+
+/* Eclipse app root */
+.eclipse-app {
+  animation: eclipseFadeIn 0.4s ease-out;
+}
+
+@keyframes eclipseFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Task item hover glow */
+.task-item {
+  transition: border-color 0.2s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: rgba(107, 163, 255, 0.15);
+  box-shadow: 0 0 20px rgba(107, 163, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+/* Login form container */
+.login-form-container {
+  border-radius: 16px;
+  background-color: #0C1117;
+  border: 1px solid #1C2536;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form-container:focus-within {
+  border-color: rgba(107, 163, 255, 0.3);
+  box-shadow: 0 0 24px rgba(107, 163, 255, 0.06);
+}
+
+/* Eclipse input focus ring */
+.eclipse-input:focus {
+  outline: none;
+  border-color: #6BA3FF;
+  box-shadow: 0 0 0 3px rgba(107, 163, 255, 0.25);
+}
+
+/* Eclipse accent gradient button */
+.eclipse-accent-btn {
+  background: linear-gradient(135deg, #6BA3FF 0%, #4A8AE6 100%);
+  color: #05070A;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.eclipse-accent-btn:hover {
+  background: linear-gradient(135deg, #8AB8FF 0%, #6BA3FF 100%);
+  box-shadow: 0 4px 16px rgba(107, 163, 255, 0.25);
+}
+
+.eclipse-accent-btn:active {
+  transform: scale(0.97);
+}
+
+/* Eclipse card style */
+.eclipse-card {
+  background-color: #0C1117;
+  border: 1px solid #1C2536;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Eclipse form (inside card) */
+.eclipse-form {
+  border-radius: 10px;
+}
+
+/* Eclipse modal overlay with backdrop blur */
+.eclipse-overlay {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Eclipse modal card */
+.eclipse-modal {
+  border-radius: 16px;
+  border: 1px solid rgba(107, 163, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(107, 163, 255, 0.06);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .App {

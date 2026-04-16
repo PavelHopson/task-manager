@@ -137,8 +137,8 @@ const EditTaskModal = ({ task, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="modal-overlay eclipse-overlay">
+      <div className="modal-content eclipse-modal">
         {/* Кнопка закрытия */}
         <button
           onClick={() => {
