@@ -138,11 +138,11 @@ const tasksSlice = createSlice({
         state.error = action.payload; // Используем rejectWithValue
       })
       // --- createTask ---
-      .addCase(createTask.pending, (state) => {
+      .addCase(createTask.pending, () => {
         // Можно показать индикатор загрузки для создания
         // state.status = 'loading'; // Или отдельное поле для статуса создания
       })
-      .addCase(createTask.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state) => {
         // Просто сбрасываем статус, чтобы показать, что операция завершена.
         // Компонент может вызвать fetchTasks после успешного создания.
         state.status = 'idle'; // Или 'succeeded' если хотим отследить
@@ -156,7 +156,7 @@ const tasksSlice = createSlice({
         state.error = action.payload; // Используем rejectWithValue
       })
       // --- updateTask ---
-      .addCase(updateTask.pending, (state) => {
+      .addCase(updateTask.pending, () => {
         // state.status = 'loading';
         // Можно добавить поле loading для конкретной задачи
       })

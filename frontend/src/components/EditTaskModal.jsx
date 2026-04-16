@@ -5,33 +5,38 @@ import { updateTask } from '../features/tasks/tasksSlice';
 import { selectAuthToken } from '../features/auth/authSlice';
 
 const EditTaskModal = ({ task, onClose }) => {
-  // --- Проверка входных данных ---
-  if (!task) {
-    console.error('EditTaskModal: Critical Error - task prop is missing or null.');
-    return null;
-  }
-
-  // Используем hasOwnProperty для безопасности
-  if (!task.hasOwnProperty('id')) {
-     console.error('EditTaskModal: Critical Error - task.id is missing.', task);
-     return <div className="modal-overlay"><div className="modal-content admin-message error">Ошибка: Неверные данные задачи (отсутствует ID).</div></div>;
-  }
-
   const dispatch = useDispatch();
   const token = useSelector(selectAuthToken);
+  const hasTask = Boolean(task);
+  const hasTaskId = Object.prototype.hasOwnProperty.call(task ?? {}, 'id');
 
-  const [text, setText] = useState(task.text || '');
-  const [isCompleted, setIsCompleted] = useState(task.isCompleted || false);
+  const [text, setText] = useState(task?.text || '');
+  const [isCompleted, setIsCompleted] = useState(task?.isCompleted || false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
   useEffect(() => {
+    if (!hasTask) {
+      return;
+    }
+
     // Сброс формы и состояния при изменении задачи
     setText(task.text || '');
     setIsCompleted(task.isCompleted || false);
     setIsUpdating(false);
     setMessage({ type: '', text: '' });
-  }, [task]);
+  }, [hasTask, task]);
+
+  // --- Проверка входных данных ---
+  if (!hasTask) {
+    console.error('EditTaskModal: Critical Error - task prop is missing or null.');
+    return null;
+  }
+
+  if (!hasTaskId) {
+     console.error('EditTaskModal: Critical Error - task.id is missing.', task);
+     return <div className="modal-overlay"><div className="modal-content admin-message error">Ошибка: Неверные данные задачи (отсутствует ID).</div></div>;
+  }
 
   const handleTextChange = (e) => setText(e.target.value);
   const handleCheckboxChange = (e) => setIsCompleted(e.target.checked);
@@ -40,7 +45,7 @@ const EditTaskModal = ({ task, onClose }) => {
     e.preventDefault();
 
     // --- Базовые проверки ---
-    if (!task || !task.hasOwnProperty('id')) {
+    if (!task || !hasTaskId) {
         const errorMsg = 'EditTaskModal.handleSubmit: Aborted - task or task.id is missing.';
         console.error(errorMsg);
         setMessage({ type: 'error', text: errorMsg });
