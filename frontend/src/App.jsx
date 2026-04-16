@@ -130,7 +130,7 @@ function App() {
 
   return (
     <div className="App eclipse-app">
-      <h1 style={{ fontFamily: "'Outfit', 'Inter', system-ui, sans-serif" }}>Задачи</h1>
+      <h1 className="text-glow" style={{ fontFamily: "'Outfit', 'Inter', system-ui, sans-serif" }}>Задачи</h1>
       <LoginForm />
       <CreateTaskForm />
       <hr />
